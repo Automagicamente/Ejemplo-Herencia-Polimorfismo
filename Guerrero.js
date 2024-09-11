@@ -1,6 +1,8 @@
 const Personaje = require("./Personaje");
+const PocionDanio = require("./PocionDanio");
+const PocionVacia = require("./PocionVacia");
 
-const VIDA_DEF = 150;
+const VIDA_DEF = 50;
 
 class Guerrero extends Personaje{
     #danio=40;
@@ -9,8 +11,18 @@ class Guerrero extends Personaje{
      * Inicializa el Guerrero
      * @param {Number} vida inical del Guerrero
      */
-    constructor(vida=VIDA_DEF){
-        super(vida);
+    constructor(vida=VIDA_DEF, pocion=new PocionDanio()){
+        super(vida, pocion);
+    }
+
+    puedoUtilizar(estaPocion){
+        return !(estaPocion instanceof PocionVacia);
+    }
+
+    aumentarDanioCon(estosPuntosDanio){
+        this.#danio+=estosPuntosDanio;
+        console.log("Ahora tengo de danio: "+ this.#danio);
+        
     }
 
     /**
@@ -26,6 +38,8 @@ class Guerrero extends Personaje{
     usarHabilidadCon(unPersonaje){
         this.atacarA(unPersonaje);
     }
+
+
 }
 
 module.exports = Guerrero;

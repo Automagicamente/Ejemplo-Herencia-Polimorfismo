@@ -1,8 +1,15 @@
 const Personaje = require("./Personaje");
+const PocionCuracion = require("./PocionCuracion");
+
+const VIDA_CURADOR_DEF = 50;
 
 class Curador extends Personaje {
     #puntosCuracion = 200;
-    
+
+    constructor(vida=VIDA_CURADOR_DEF, pocion=new PocionCuracion()){
+        super(vida, pocion);
+    }
+
     /**
      * Cura a un personaje
      * @param {Personaje} unPersonaje a curar
@@ -19,6 +26,10 @@ class Curador extends Personaje {
 
     usarHabilidadCon(unPersonaje) {
         this.curarA(unPersonaje);
+    }
+
+    puedoUtilizar(estaPocion){
+        return estaPocion instanceof PocionCuracion;
     }
 }
 
